@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+    mariadb:
+        image: mariadb
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: dolibarr
+
+    dolibarr:
+        image: tuxgasy/dolibarr
+        environment:
+            DOLI_DB_HOST: mariadb
+            DOLI_DB_USER: root
+            DOLI_DB_PASSWORD: root
+            DOLI_DB_NAME: dolibarr
+            PHP_INI_DATE_TIMEZONE: "Europe/Paris"
+        ports:
+            - "80:80"
+        links:
+            - mariadb
