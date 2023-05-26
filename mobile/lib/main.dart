@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/debug_ar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +27,11 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: const DebugOptionsWidget(),
+    );
   }
 }
