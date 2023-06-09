@@ -1,0 +1,38 @@
+name: Unity Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Unity version
+      uses: game-ci/unity-setup@v1.2
+      with:
+        unity-version: '2021.2.12' # ou remplacer par la version que vous utilisez
+
+    - name: Cache library
+      uses: actions/cache@v2.1.6
+      with:
+        path: Library
+        key: Library
+
+    - name: Build project
+      uses: game-ci/unity-builder@v2.0-alpha-6
+      with:
+        unityVersion: 2021.2.12 # ou remplacer par la version que vous utilisez
+        targetPlatform: StandaloneWindows64 # ou remplacer par votre plate-forme cible
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Build
+        path: build/StandaloneWindows64
